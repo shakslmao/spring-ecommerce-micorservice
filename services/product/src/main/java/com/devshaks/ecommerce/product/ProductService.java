@@ -1,11 +1,14 @@
 package com.devshaks.ecommerce.product;
 
+import com.devshaks.ecommerce.exception.ProductPurchaseException.ProductPurchaseException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +26,32 @@ public class ProductService {
     public List<ProductPurchaseResponse> purchaseProduct(List<ProductPurchaseRequest> purchaseRequest) {
         var productsIds = purchaseRequest.stream().map(ProductPurchaseRequest::productId).toList();
         var storedProducts = productRepository.findAllByIdInOrderById(productsIds);
-        return null;
+
+        if (productsIds.size() != storedProducts.size()) {
+            throw new ProductPurchaseException("One or More Products Was Not Found");
+        }
+
+        var storedRequest = purchaseRequest
+                .stream()
+                .sorted(Comparator.comparing(ProductPurchaseRequest::productId))
+                .toList();
+
+        var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
+        for (int i = 0; i < storedProducts.size(); i++) {
+            var product = storedProducts.get(i);
+            var productRequest = storedRequest.get(i);
+
+            if (product.getAvailableQuantity() < productRequest.quantity()) {
+                throw new ProductPurchaseException("Product " + product.getName() + " " + product.getId() + " is Out of Stock");
+            }
+
+            var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
+            product.setAvailableQuantity(newAvailableQuantity);
+            productRepository.save(product);
+            purchasedProducts.add(productMapper.toProductPurchaseResponse(product, productRequest.quantity()));
+        }
+
+        return purchasedProducts;
     }
 
     public ProductResponse findById(Integer productId) {
