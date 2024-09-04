@@ -1,5 +1,6 @@
 package com.devshaks.ecommerce.order;
 
+import com.devshaks.ecommerce.orderline.OrderLine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

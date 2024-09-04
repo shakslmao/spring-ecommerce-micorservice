@@ -29,17 +29,4 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getCategory().getId(),
                 product.getCategory().getName(),
-                product.getCategory().getDescription()
-        );
-    }
-
-    public ProductPurchaseResponse toProductPurchaseResponse(Product product, @NotNull(message = "Quantity is required") double quantity) {
-        return new ProductPurchaseResponse(
-                product.getId(),
-                product.getName(),
-                product.getDescription(),
-                product.getPrice(),
-                quantity
-        );
-    }
-}
+                product.get
