@@ -2,12 +2,13 @@ package com.devshaks.ecommerce.product;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.validation.annotation.Validated;
 
+@Validated
 public record PurchaseRequest(
-        @NotNull(message = "Product Is Required")
+        @NotNull(message = "Product is mandatory")
         Integer productId,
-
-        @Positive(message = "Quantity Should Be Positive")
+        @Positive(message = "Quantity is mandatory")
         double quantity
 ) {
 }

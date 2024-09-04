@@ -1,6 +1,5 @@
 package com.devshaks.ecommerce.order;
 
-import com.devshaks.ecommerce.product.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -22,9 +21,9 @@ public record OrderRequest(
         @NotNull(message = "Customer is Required")
         @NotEmpty(message = "Customer is Required")
         @NotBlank(message = "Customer is Required")
-        String customerId,
+        String customerId
 
-        @NotEmpty(message = "Products are Required")
-        List<PurchaseRequest> products
+
+      
 ) {
 }

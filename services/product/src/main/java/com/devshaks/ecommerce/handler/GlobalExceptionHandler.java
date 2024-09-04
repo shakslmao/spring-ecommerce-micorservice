@@ -1,6 +1,6 @@
 package com.devshaks.ecommerce.handler;
 
-import com.devshaks.ecommerce.exception.ProductPurchaseException.ProductPurchaseException;
+import com.devshaks.ecommerce.exception.ProductPurchaseException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
-package com.devshaks.ecommerce.customer;
+package com.devshaks.ecommerce.order;
 
+import com.devshaks.ecommerce.customer.CustomerResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

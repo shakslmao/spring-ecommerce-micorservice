@@ -1,4 +1,4 @@
-package com.devshaks.ecommerce.exception.ProductPurchaseException;
+package com.devshaks.ecommerce.exception;
 
 public class ProductPurchaseException extends RuntimeException {
     public ProductPurchaseException(String message) {
