@@ -3,7 +3,6 @@ package com.devshaks.ecommerce.product;
 import com.devshaks.ecommerce.exception.ProductPurchaseException.ProductPurchaseException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,7 @@ public class ProductService {
                 .toList();
 
         var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
+
         for (int i = 0; i < storedProducts.size(); i++) {
             var product = storedProducts.get(i);
             var productRequest = storedRequest.get(i);
