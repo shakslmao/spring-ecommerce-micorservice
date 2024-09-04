@@ -22,8 +22,5 @@ public record OrderRequest(
         @NotEmpty(message = "Customer is Required")
         @NotBlank(message = "Customer is Required")
         String customerId
-
-
-      
 ) {
 }

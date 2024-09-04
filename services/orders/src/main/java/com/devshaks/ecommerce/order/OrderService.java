@@ -1,6 +1,9 @@
 package com.devshaks.ecommerce.order;
 
+import com.devshaks.ecommerce.customer.CustomerClient;
 import com.devshaks.ecommerce.exception.BusinessException;
+import com.devshaks.ecommerce.product.ProductClient;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

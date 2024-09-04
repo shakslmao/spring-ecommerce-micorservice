@@ -37,33 +37,4 @@ public class ProductService {
 
         var purchasedProducts = new ArrayList<ProductPurchaseResponse>();
 
-        for (int i = 0; i < storedProducts.size(); i++) {
-            var product = storedProducts.get(i);
-            var productRequest = storedRequest.get(i);
-
-            if (product.getAvailableQuantity() < productRequest.quantity()) {
-                throw new ProductPurchaseException("Product " + product.getName() + " " + product.getId() + " is Out of Stock");
-            }
-
-            var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
-            product.setAvailableQuantity(newAvailableQuantity);
-            productRepository.save(product);
-            purchasedProducts.add(productMapper.toProductPurchaseResponse(product, productRequest.quantity()));
-        }
-
-        return purchasedProducts;
-    }
-
-    public ProductResponse findById(Integer productId) {
-        return productRepository.findById(productId)
-                .map(productMapper::toProductResponse)
-                .orElseThrow(() -> new EntityNotFoundException("Product Not Found with ID: " + productId));
-    }
-
-    public List<ProductResponse> findAll() {
-        return productRepository.findAll()
-                .stream()
-                .map(productMapper::toProductResponse)
-                .collect(Collectors.toList());
-    }
-}
+        for (int i = 0; i < stor
