@@ -1,16 +1,15 @@
 package com.devshaks.ecommerce.orderline;
 
+import ch.qos.logback.classic.spi.LoggingEventVO;
 import com.devshaks.ecommerce.order.Order;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 public class OrderLine {
     @Id
@@ -23,4 +22,6 @@ public class OrderLine {
 
     private Integer productId;
     private double quantity;
+
+
 }
