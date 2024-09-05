@@ -1,6 +1,5 @@
 package com.devshaks.ecommerce.orderline;
 
-import ch.qos.logback.classic.spi.LoggingEventVO;
 import com.devshaks.ecommerce.order.Order;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,9 +1,7 @@
 package com.devshaks.ecommerce.orderline;
 
-public record OrderLineRequest(
+public record OrderLineResponse(
         Integer id,
-        Integer orderId,
-        Integer productId,
         double quantity
 ) {
 }

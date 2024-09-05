@@ -1,8 +1,7 @@
-package com.devshaks.ecommerce.order;
+package com.devshaks.ecommerce.product;
 
 import com.devshaks.ecommerce.exception.BusinessException;
-import com.devshaks.ecommerce.product.PurchaseRequest;
-import com.devshaks.ecommerce.product.PurchaseResponse;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;

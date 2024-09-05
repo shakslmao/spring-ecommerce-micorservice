@@ -98,4 +98,12 @@
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
-							<artifactId>lo
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

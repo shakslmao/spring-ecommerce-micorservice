@@ -6,6 +6,8 @@ import com.devshaks.ecommerce.exception.BusinessException;
 import com.devshaks.ecommerce.kafka.OrderConfirmation;
 import com.devshaks.ecommerce.kafka.OrderProducer;
 import com.devshaks.ecommerce.orderline.OrderLineRequest;
+import com.devshaks.ecommerce.orderline.OrderLineService;
+import com.devshaks.ecommerce.product.ProductClient;
 import com.devshaks.ecommerce.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
