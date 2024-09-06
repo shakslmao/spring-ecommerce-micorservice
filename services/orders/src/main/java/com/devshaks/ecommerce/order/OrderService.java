@@ -58,3 +58,16 @@ public class OrderService {
                 customer,
                 purchasedProducts));
 
+        return order.getId();
+    }
+
+    public List<OrderResponse> findAll() {
+        return orderRepository.findAll().stream().map(orderMapper::fromOrder).collect(Collectors.toList());
+    }
+
+    public OrderResponse findById(Integer orderId) {
+        return orderRepository.findById(orderId)
+                .map(orderMapper::fromOrder)
+                .orElseThrow(() -> new EntityNotFoundException("Order Not Found with ID: " + orderId));
+    }
+}
