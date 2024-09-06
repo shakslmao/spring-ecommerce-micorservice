@@ -1,5 +1,7 @@
 package com.devshaks.payment.payment;
 
+import com.devshaks.payment.notification.NotificationProducer;
+import com.devshaks.payment.notification.PaymentNotificationRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,11 +11,18 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentMapper paymentMapper;
-
+    private final NotificationProducer notificationProducer;
 
     public Integer createPayment(@Valid PaymentRequest paymentRequest) {
         var payment = paymentRepository.save(paymentMapper.toPayment(paymentRequest));
-
-        return null;
+        notificationProducer.sendNotification(
+                new PaymentNotificationRequest(
+                        paymentRequest.orderReference(),
+                        paymentRequest.paymentAmount(),
+                        paymentRequest.paymentMethod(),
+                        paymentRequest.customer().firstname(),
+                        paymentRequest.customer().lastname(),
+                        paymentRequest.customer().email()));
+        return payment.getId();
     }
 }

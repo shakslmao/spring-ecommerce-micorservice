@@ -7,6 +7,8 @@ import com.devshaks.ecommerce.kafka.OrderConfirmation;
 import com.devshaks.ecommerce.kafka.OrderProducer;
 import com.devshaks.ecommerce.orderline.OrderLineRequest;
 import com.devshaks.ecommerce.orderline.OrderLineService;
+import com.devshaks.ecommerce.payment.PaymentClient;
+import com.devshaks.ecommerce.payment.PaymentRequest;
 import com.devshaks.ecommerce.product.ProductClient;
 import com.devshaks.ecommerce.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -26,6 +28,7 @@ public class OrderService {
     private final OrderProducer orderProducer;
     private final CustomerClient customerClient;
     private final ProductClient productClient;
+    private final PaymentClient paymentClient;
 
 
     public Integer createOrder(@Valid OrderRequest orderRequest) {
@@ -37,6 +40,16 @@ public class OrderService {
         for (PurchaseRequest purchaseRequest : orderRequest.products()) {
             orderlineService.saveOrderLine(new OrderLineRequest(null, order.getId(),purchaseRequest.productId(), purchaseRequest.quantity()));
         }
+
+        var paymentRequest = new PaymentRequest(
+                orderRequest.amount(),
+                orderRequest.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+
+        paymentClient.requestOrderPayment(paymentRequest);
 
         orderProducer.sendOrderConfirmation(new OrderConfirmation(
                 orderRequest.reference(),
